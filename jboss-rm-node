@@ -1,0 +1,6 @@
+#! /bin/sh
+#variable declaration
+SCRIPT=$HOME/bin/useJboss$1
+JBOSS_NEW_NODE=$HOME/build/products/jboss/release/$1
+rm -Rf $JBOSS_NEW_NODE $SCRIPT
+

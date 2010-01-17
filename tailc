@@ -1,0 +1,2 @@
+#! /bin/bash
+tail -f $! | awk '/^[0-9]/{if(/ERROR|FATAL/){n=1;s="\033[31;1m";e="\033[0m"}else if(/WARN/){n=1;s="\033[33m";e="\033[0m"}else if(/MicroKernel|Shutdown/){n=1;s="\033[1m";e="\033[0m"}else{n=0;s="";e=""}}{if(1)print s $0 e}'

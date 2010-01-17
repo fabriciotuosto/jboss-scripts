@@ -1,0 +1,5 @@
+#! /bin/sh
+pushd . > /dev/null
+cd $JBOSS_HOME/server/default/bin
+./jbossctl.sh stop
+popd > /dev/null

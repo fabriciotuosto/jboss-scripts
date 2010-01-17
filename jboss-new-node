@@ -1,0 +1,24 @@
+#! /bin/sh
+# variable configuration each person should configure
+# this variables acording to his environment
+SCRIPT_EXECUTABLE_PATH=$HOME/bin
+SCRIPT=$SCRIPT_EXECUTABLE_PATH/bin/useJboss$1
+JBOSS_NEW_NODE=$HOME/build/products/jboss/release/$1
+JBOSS_DEFAULT_NODE=$HOME/build/products/jboss/release/4.0.4.GA/2.0.0
+#--------------------------------------------------------------------
+# copying instance from fresh install
+cp -R $JBOSS_DEFAULT_NODE $JBOSS_NEW_NODE
+# creating script
+echo "
+export JBOSS_HOME=$JBOSS_NEW_NODE
+export JBOSS_SERVER=\$JBOSS_HOME/server/default
+export JAVA_OPTS=\"-server -Djava.security.manager=java.rmi.RMISecurityManager -Dprogram.name=run.sh -Xmx512m -Xms512m -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,address=1343,suspend=n,server=y -Dfile.encoding=ISO-8859-1\"
+echo \"### Jboss home : \${JBOSS_HOME}\"
+" >> $SCRIPT
+# make script executable
+chmod +x $SCRIPT
+# After creating the instance configure it by default
+pushd . >> /dev/null
+cd $JBOSS_NEW_NODE/server/default/bin
+./configure.sh -i
+popd >> /dev/null

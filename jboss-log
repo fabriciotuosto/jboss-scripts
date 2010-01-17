@@ -1,0 +1,2 @@
+#! /bin/bash
+tailc $JBOSS_HOME/server/default/log/server.log
