@@ -1,0 +1,6 @@
+#! /bin/bash
+
+pushd . > /dev/null
+cd $JBOSS_SERVER
+rm -Rf work tmp deploy/*
+popd > /dev/null
