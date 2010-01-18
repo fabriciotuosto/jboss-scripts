@@ -1,8 +1,9 @@
 #! /bin/sh
 # variable configuration each person should configure
 # this variables acording to his environment
+DEBUG_PORT=1343
 SCRIPT_EXECUTABLE_PATH=$HOME/bin
-SCRIPT=$SCRIPT_EXECUTABLE_PATH/bin/useJboss$1
+SCRIPT=$SCRIPT_EXECUTABLE_PATH/bin/jboss-use-$1
 JBOSS_NEW_NODE=$HOME/build/products/jboss/release/$1
 JBOSS_DEFAULT_NODE=$HOME/build/products/jboss/release/4.0.4.GA/2.0.0
 #--------------------------------------------------------------------
@@ -12,7 +13,7 @@ cp -R $JBOSS_DEFAULT_NODE $JBOSS_NEW_NODE
 echo "
 export JBOSS_HOME=$JBOSS_NEW_NODE
 export JBOSS_SERVER=\$JBOSS_HOME/server/default
-export JAVA_OPTS=\"-server -Djava.security.manager=java.rmi.RMISecurityManager -Dprogram.name=run.sh -Xmx512m -Xms512m -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,address=1343,suspend=n,server=y -Dfile.encoding=ISO-8859-1\"
+export JAVA_OPTS=\"-server -Djava.security.manager=java.rmi.RMISecurityManager -Dprogram.name=run.sh -Xmx512m -Xms512m -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,address=${DEBUG_PORT},suspend=n,server=y -Dfile.encoding=ISO-8859-1\"
 echo \"### Jboss home : \${JBOSS_HOME}\"
 " >> $SCRIPT
 # make script executable
