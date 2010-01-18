@@ -7,6 +7,11 @@ SCRIPT=$SCRIPT_EXECUTABLE_PATH/bin/jboss-use-$1
 JBOSS_NEW_NODE=$HOME/build/products/jboss/release/$1
 JBOSS_DEFAULT_NODE=$HOME/build/products/jboss/release/4.0.4.GA/2.0.0
 #--------------------------------------------------------------------
+if[ -n $2 ]
+then
+	DEBUG_PORT=$2
+fi
+#--------------------------------------------------------------------
 # copying instance from fresh install
 cp -R $JBOSS_DEFAULT_NODE $JBOSS_NEW_NODE
 # creating script
@@ -16,6 +21,7 @@ export JBOSS_SERVER=\$JBOSS_HOME/server/default
 export JAVA_OPTS=\"-server -Djava.security.manager=java.rmi.RMISecurityManager -Dprogram.name=run.sh -Xmx512m -Xms512m -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,address=${DEBUG_PORT},suspend=n,server=y -Dfile.encoding=ISO-8859-1\"
 echo \"### Jboss home : \${JBOSS_HOME}\"
 " >> $SCRIPT
+#--------------------------------------------------------------------
 # make script executable
 chmod +x $SCRIPT
 # After creating the instance configure it by default
